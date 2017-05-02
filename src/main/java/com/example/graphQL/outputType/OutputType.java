@@ -7,7 +7,9 @@ import graphql.schema.GraphQLList;
 import graphql.schema.GraphQLObjectType;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static graphql.Scalars.GraphQLInt;
 import static graphql.Scalars.GraphQLString;
@@ -59,6 +61,10 @@ public class OutputType {
                 .dataFetcher(environment -> {
                     // 获取查询参数
                     int id = environment.getArgument("id");
+
+                    Map<String,Object> resuleMap = new LinkedHashMap<String,Object>();
+
+
                     User user = new User();
                     user.setId(id);
                     user.setAge(id+15);
@@ -93,8 +99,7 @@ public class OutputType {
                     //获取传入进来的参数
                     int page = environment.getArgument("page");
                     int size = environment.getArgument("size");
-                    int name = environment.getArgument("name");
-
+                    String name = environment.getArgument("name");
                     //执行查询
                     List<User> list = new ArrayList<User>(size);
                     for (int i = 0; i < size; i++) {

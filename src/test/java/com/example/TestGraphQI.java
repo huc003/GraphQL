@@ -21,9 +21,11 @@ public class TestGraphQI {
 
         GraphQLSchema schema = new GraphSchema().getSchema();
         String sql1 = "{user(id:10){id,sex,name,pic}}";
+        String sqllist = "{users(page:2,size:10,name:\"zhansan\"){id,sex,name,pic}}";
         Map<String,Object> result1 = (Map<String, Object>) GraphQL.newGraphQL(schema).build().execute(sql1).getData();
-
+        Map<String,Object> resultList = (Map<String,Object>) GraphQL.newGraphQL(schema).build().execute(sqllist).getData();
         System.out.println(result1);
+        System.out.println(resultList);
 
     }
 }
